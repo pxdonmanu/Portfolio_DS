@@ -1,0 +1,243 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link type="text/css" href="{% static "css/main.css" %}" rel="stylesheet" />
+    <link rel="shortcut icon" type="image/x-icon" href="{% static "images/ds-logo.ico" %}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <title>Portfolio</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="title-ptf">
+        <li class="bx bxs-briefcase"></li>
+        <span class="txt-port">
+          Portfolio
+        </span>
+      </div>
+      <nav>
+        <ul class="navbar en-nav">
+          <li><a href="#home">Home</a></li>
+          <li>
+            <a href="#about">About me <i class='bx bxs-chevron-down'></i></a>
+            <ul class="about-menu en-menu">
+              <li><a href="#skills">Skills</a></li>
+              <li><a href="#exp">Experience</a></li>
+              <li><a href="#education">Education</a></li>
+              <li><a href="#vision">Vision</a></li>
+            </ul>
+          </li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#ctc">Contact</a></li>
+          <li><a href="{% static 'files/CV_JMPR_es.pdf' %}" target="_blank" class="link-cv">Download CV</a></li>
+        </ul>
+      </nav>
+      <div class="tools">
+        <a href="{% static 'files/CV_JMPR_en.pdf' %}" target="_blank" class="cv">Download CV</a>
+        <div class="bx bx-menu" id="menu-icon"></div>
+        <a class="lng-btn" href="{% url "index" %}">
+          <img src="{% static "images/mexico.png" %}">
+        </a>
+      </div>
+    </header>
+
+    <main>
+      {% include 'english/home.html' %}
+      {% include 'english/me/about.html' %}
+      
+      {% comment %} SKILLS {% endcomment %}
+
+      <div class="item skills-div" id="skills">
+        <div class="content-skills">
+          <div class="ctn-sks-left">
+            <div class="sks-title">
+              <h1>Professional skills</h1>
+            </div>
+            <div class="sks-content">
+      
+            </div>
+          </div>
+          <div class="ctn-sks-right">
+            <div class="sks-title">
+              <h1>Technical skills</h1>
+            </div>
+            <div class="sks-content">
+      
+              {% for tecSkill in tecskills %}
+                <div class="tec-abi">
+                  <div class="tec-abi-img">
+                    <div class="tec-img">
+                      <img src="{{ tecSkill.image.url }}"/>
+                    </div>
+                  </div>
+                  <div class="tec-abi-text">
+                    <h1>{{ tecSkill.name }}</h1>
+                    {% if tecSkill.level|stringformat:"s" == "1"  %}
+                      <p><i class='bx bxs-data'></i></p>
+                    {% endif %}
+                    {% if tecSkill.level|stringformat:"s" == "2"  %}
+                      <p><i class='bx bxs-data'></i><i class='bx bxs-data'></i></p>
+                    {% endif %}
+                    {% if tecSkill.level|stringformat:"s" == "3"  %}
+                      <p><i class='bx bxs-data'></i><i class='bx bxs-data'></i><i class='bx bxs-data'></i></p>
+                    {% endif %}
+                    {% if tecSkill.level|stringformat:"s" == "4"  %}
+                      <p><i class='bx bxs-data'></i><i class='bx bxs-data'></i><i class='bx bxs-data'></i><i class='bx bxs-data'></i></p>
+                    {% endif %}
+                    {% if tecSkill.level|stringformat:"s" == "5"  %}
+                      <p><i class='bx bxs-data'></i><i class='bx bxs-data'></i><i class='bx bxs-data'></i><i class='bx bxs-data'></i><i class='bx bxs-data'></i></p>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endfor %}
+      
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {% include 'english/me/experience.html' %}
+      {% include 'english/me/education.html' %}
+      {% include 'english/me/vision.html' %}
+      
+      {% comment %} PROJECTS {% endcomment %}
+
+      <div class="item prj-div" id="projects">
+        <div class="title-sec-prj">
+          <div class="title-prj project-title">
+            <h1>Projects</h1>
+          </div>
+        </div>
+        <div class="content-prj">
+          <div class="slide-container">
+            <div class="cont-btn-left">
+              <button class="btn-back"><i class='bx bxs-chevron-left'></i></button>
+            </div>
+            
+              <div class="prj-wrapper">
+                {% for project in projects %}
+                <div class="project">
+                  <div class="image-content-prj">
+                    <span class="overlay"></span>
+                    <div class="card-image">
+                      <img src="{{ project.image.url }}" alt="{{ project.title }}" class="prj-img" />
+                    </div>
+                  </div>
+                  <div class="text-content-prj">
+                    <div class="title-div-prj">
+                      <h1>{{ project.title }}</h1>
+                    </div>
+                    <div class="desc-div-prj">
+                      <p>{{ project.description }}</p>
+                    </div>
+                    {% if project.url %}
+                    <div class="link-div-prj">
+                      <a class="prj-link" target="_blank" href="{{ project.url }}">
+                        View project
+                      </a>
+                    </div>
+                    {% else %}
+                    <div class="link-div-prj">
+                      <a class="prj-link" target="_blank" href="/">
+                        View project
+                      </a>
+                    </div>
+                    {% endif %}
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+          
+            <div class="cont-btn-right">
+              <button class="btn-next"><i class='bx bxs-chevron-right'></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {% comment %} BLOG {% endcomment %}
+
+      <div class="item post-div" id="blog">
+        <div class="content-post">
+          <div class="title-sec-blog">
+            <div class="title-blog"><h1>Blog</h1></div>
+          </div>
+          <div class="container-posts">
+            {% for post in posts %}
+              <div class="post">
+                <div class="ini-text-blog">
+                  <div class="text-blog-title"><h1>{{ post.title }}</h1></div>
+                  <div class="text-blog-p"><p>{{ post.date|date:'M d Y' }}</p></div>
+                </div>
+                <div class="blog-line"><hr></div>
+                <div class="sec-text-blog">
+                  <div class="desc-post-blog">
+                    <div class="desc-post"><p>{{ post.description|striptags|truncatechars:300 }}</p></div>
+                  </div>
+                  <div class="img-post-blog">
+                    <div class="img-post"><img src="{{ post.image.url }}" alt="{{ post.title }}" /></div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      {% comment %} CONTACT {% endcomment %}
+      
+      <div class="item ctc-div" id="ctc">
+        <div class="title-sec-ctc">
+          <div class="title-ctc ctc-en"><h1>Contact</h1></div>
+        </div>
+        <div class="content-ctc">
+          <div class="ctc-left">
+            <div class="icons-ctn">
+              <div class="icon-ctc"><i class='bx bxs-phone' ></i><p class="data-ctc">+52 55 7119 0185</p></div>
+              <a href="https://api.whatsapp.com/send?phone=5571190185" target="_blank" class="icon-ctc"><i class='bx bxl-whatsapp' ></i><p class="data-ctc">Send direct message</p></a>
+              <a href="mailto:jmparedonr2005@gmail.com?subject=Email%20subject&body=Email%20body" target="_blank" class="icon-ctc"><i class='bx bxs-envelope' ></i><p class="data-ctc">Send direct email</p></a>
+              <a href="https://goo.gl/maps/8uanXkaLVYcHADT6A" target="_blank" class="icon-ctc"><i class='bx bxs-building-house'></i><p class="data-ctc">View my location</p></a>
+            </div>
+          </div>
+          <form class="ctc-right" method="POST">
+            {% csrf_token %}
+            <div class="divs-ctc">
+              <div class="ps-ctc">
+                <input type="text" placeholder="Name" name="name">
+                <input type="text" placeholder="Email" name="email">
+              </div>
+              <div class="cs-ctc">
+                <input type="text" placeholder="Job Vacancy" name="position">
+                <input type="text" placeholder="Company" name="company">
+              </div>
+              <div class="msj-ctc">
+                <textarea placeholder="Message" name="message"></textarea>
+              </div>
+            </div>
+            <div class="send-ctc">
+              <div class="btn-send-ctc">
+                <button type="submit">Send<i class='bx bxs-send send-icon-about'></i></button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </main>
+
+    <script type="text/javascript" src="{% static "js/actions.js" %}"></script>
+
+  </body>
+
+</html>
