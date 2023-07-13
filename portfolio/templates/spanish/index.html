@@ -13,6 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <title>Portafolio</title>
   </head>
 
@@ -33,7 +34,6 @@
             <ul class="about-menu">
               <li><a href="#skills">Habilidades</a></li>
               <li><a href="#exp">Experiencia</a></li>
-              <li><a href="#formacion">Formación</a></li>
               <li><a href="#vision">Visión</a></li>
             </ul>
           </li>
@@ -47,7 +47,7 @@
         <a href="{% static 'files/CV_JMPR_es.pdf' %}" target="_blank" class="cv">Descargar CV</a>
         <div class="bx bx-menu" id="menu-icon"></div>
         <a class="lng-btn" href="{% url "index_en" %}">
-          <img src="{% static "images/united-states.png" %}">
+          <img class="lng-btn-img" src="{% static "images/united-states.png" %}">
         </a>
       </div>
     </header>
@@ -60,19 +60,34 @@
 
       <div class="item skills-div" id="skills">
         <div class="content-skills">
+
           <div class="ctn-sks-left">
             <div class="sks-title">
               <h1>Habilidades profesionales</h1>
             </div>
-            <div class="sks-content">
-              
+            <div class="sks-content pro-sks-cont">
+
+              {% for proSkill in proskills %}
+                <div class="pro-abi">
+                  <div class="pro-abi-img">
+                    <div class="pro-img">
+                      <img src="{{ proSkill.image.url }}"/>
+                    </div>
+                  </div>
+                  <div class="pro-abi-text">
+                    <div class="pro-abi-name"><h1>{{ proSkill.name }}</h1></div>
+                  </div>
+                </div>
+              {% endfor %}
+
             </div>
           </div>
+
           <div class="ctn-sks-right">
             <div class="sks-title">
               <h1>Habilidades técnicas</h1>
             </div>
-            <div class="sks-content">
+            <div class="sks-content tec-sks-cont">
       
               {% for tecSkill in tecskills %}
                 <div class="tec-abi">
@@ -107,8 +122,61 @@
         </div>
       </div>
 
-      {% include 'spanish/yo/experiencia.html' %}
-      {% include 'spanish/yo/formacion.html' %}
+      {% comment %} EXPERIENCIA {% endcomment %}
+
+      <div class="item exp-div" id="exp">
+        <div class="content-exp">
+          <div class="exp-title">
+            <h1>Experiencia y Formación</h1>
+          </div>
+          <div class="ctn-exp">
+            <section class="timeline-exp">
+              <div class="timeline-line">
+                <span class="timeline-innerline"></span>
+              </div>
+              <ul class="ul-timeline">
+                <li class="li timeline">
+                  <div class="timeline-content">
+                    <span class="timeline-point"></span>
+                    <span class="date">2020</span>
+                    <p class="p-timeline"><strong>Desarrollador front-end </strong>(Proyecto escolar y proyectos personales)</p>
+                  </div>
+                </li>
+                <li class="li timeline">
+                  <div class="timeline-content">
+                    <span class="timeline-point"></span>
+                    <span class="date">2021</span>
+                    <p class="p-timeline"><strong>Desarrollador back-end </strong>(Proyecto escolar y proyectos personales)</p>
+                  </div>
+                </li>
+                <li class="li timeline">
+                  <div class="timeline-content">
+                    <span class="timeline-point"></span>
+                    <span class="date">2021</span>
+                    <p class="p-timeline"><strong>Analista de datos </strong>(Proyecto escolar y proyectos personales)</p>
+                  </div>
+                </li>
+                <li class="li timeline">
+                  <div class="timeline-content">
+                    <span class="timeline-point"></span>
+                    <span class="date">2022</span>
+                    <p class="p-timeline"><strong>Científico de datos jr. </strong>(Proyecto escolar y proyectos personales)</p>
+                  </div>
+                </li>
+                <li class="li timeline">
+                  <div class="timeline-content">
+                    <span class="timeline-point"></span>
+                    <span class="date">2023</span>
+                    <p class="p-timeline"><strong>Técnico en Programación </strong>(Titulado)</p>
+                  </div>
+                </li>
+              </ul>
+            </section>
+          </div>
+        </div>
+      </div>
+      
+
       {% include 'spanish/yo/vision.html' %}
 
       {% comment %} PROYECTOS {% endcomment %}
@@ -125,40 +193,40 @@
               <button class="btn-back"><i class='bx bxs-chevron-left'></i></button>
             </div>
             
-              <div class="prj-wrapper">
-                {% for project in projects %}
-                <div class="project">
-                  <div class="image-content-prj">
-                    <span class="overlay"></span>
-                    <div class="card-image">
-                      <img src="{{ project.image.url }}" alt="{{ project.title }}" class="prj-img" />
-                    </div>
-                  </div>
-                  <div class="text-content-prj">
-                    <div class="title-div-prj">
-                      <h1>{{ project.title }}</h1>
-                    </div>
-                    <div class="desc-div-prj">
-                      <p>{{ project.description }}</p>
-                    </div>
-                    {% if project.url %}
-                    <div class="link-div-prj">
-                      <a class="prj-link" target="_blank" href="{{ project.url }}">
-                        Ver proyecto
-                      </a>
-                    </div>
-                    {% else %}
-                    <div class="link-div-prj">
-                      <a class="prj-link" target="_blank" href="/">
-                        Ver proyecto
-                      </a>
-                    </div>
-                    {% endif %}
+            <div class="prj-wrapper">
+              {% for project in projects %}
+              <div class="project">
+                <div class="image-content-prj">
+                  <span class="overlay"></span>
+                  <div class="card-image">
+                    <img src="{{ project.image.url }}" alt="{{ project.title }}" class="prj-img" />
                   </div>
                 </div>
-                {% endfor %}
+                <div class="text-content-prj">
+                  <div class="title-div-prj">
+                    <h1>{{ project.title }}</h1>
+                  </div>
+                  <div class="desc-div-prj">
+                    <p>{{ project.description }}</p>
+                  </div>
+                  {% if project.url %}
+                  <div class="link-div-prj">
+                    <a class="prj-link" target="_blank" href="{{ project.url }}">
+                      Ver proyecto
+                    </a>
+                  </div>
+                  {% else %}
+                  <div class="link-div-prj">
+                    <a class="prj-link" target="_blank" href="/">
+                      Ver proyecto
+                    </a>
+                  </div>
+                  {% endif %}
+                </div>
               </div>
-          
+              {% endfor %}
+            </div>
+        
             <div class="cont-btn-right">
               <button class="btn-next"><i class='bx bxs-chevron-right'></i></button>
             </div>
@@ -237,6 +305,7 @@
     </main>
 
     <script type="text/javascript" src="{% static "js/actions.js" %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
   </body>
 

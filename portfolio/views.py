@@ -5,6 +5,8 @@ from .models import Projects_en
 from .models import Post_en
 from .models import TecSkills
 from .models import ContactData
+from .models import ProSkills
+from .models import ProSkills_en
 from django.contrib import messages
 
 def index(request):
@@ -33,7 +35,8 @@ def index(request):
     projects = Projects.objects.all()
     posts = Post.objects.all()
     tecskills = TecSkills.objects.all()
-    return render(request, 'spanish/index.html', {'projects': projects, 'posts': posts, 'tecskills': tecskills})
+    proskills= ProSkills.objects.all()
+    return render(request, 'spanish/index.html', {'projects': projects, 'posts': posts, 'tecskills': tecskills, 'proskills': proskills})
 
 def index_en(request):
     if request.method == 'POST':
@@ -61,4 +64,5 @@ def index_en(request):
     projects = Projects_en.objects.all()
     posts = Post_en.objects.all()
     tecskills = TecSkills.objects.all()
-    return render(request, 'english/en_index.html', {'projects': projects, 'posts': posts, 'tecskills': tecskills})
+    proskills= ProSkills_en.objects.all()
+    return render(request, 'english/en_index.html', {'projects': projects, 'posts': posts, 'tecskills': tecskills, 'proskills': proskills})

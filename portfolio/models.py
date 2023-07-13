@@ -7,25 +7,25 @@ from django import forms
 class Projects(models.Model):
     title = CharField(max_length=20)
     description = CharField(max_length=80)
-    image = ImageField(upload_to='portfolio/images/')
+    image = ImageField(upload_to='portfolio/images/', default='default/default.png')
     url = URLField(blank=True)
 
 class Projects_en(models.Model):
     title = CharField(max_length=20)
     description = CharField(max_length=80)
-    image = ImageField(upload_to='portfolio/images_en/')
+    image = ImageField(upload_to='portfolio/images_en/', default='default/default.png')
     url = URLField(blank=True)
 
 class Post(models.Model):
     title = CharField(max_length=40)
     description = TextField()
-    image = ImageField(upload_to='blog/images/')
+    image = ImageField(upload_to='blog/images/', default='default/default.png')
     date = DateField(datetime.date.today)
 
 class Post_en(models.Model):
     title = CharField(max_length=40)
     description = TextField()
-    image = ImageField(upload_to='blog/images_en/')
+    image = ImageField(upload_to='blog/images_en/', default='default/default.png')
     date = DateField(datetime.date.today)
 
 class ContactData(models.Model):
@@ -43,7 +43,16 @@ class TecSkills(models.Model):
         (4, '4'),
         (5, '5'),
     )
-    name = CharField(max_length=20)
+    name = CharField(max_length=30)
     level = IntegerField(choices=LEVEL_CHOICES)
     image = ImageField(upload_to='skills/images/', default='default/default.png')
+
+class ProSkills(models.Model):
+    name = CharField(max_length=40)
+    image = ImageField(upload_to='skills/images_pro/', default='default/default.png')
+
+class ProSkills_en(models.Model):
+    name = CharField(max_length=40)
+    image = ImageField(upload_to='skills/images_pro_en/', default='default/default.png')
+
 

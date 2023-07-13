@@ -6,7 +6,6 @@ menu.onclick = () => {
   navbar.classList.toggle("open");
 };
 
-// Slider
 document.addEventListener('DOMContentLoaded', function() {
   var prjWrapper = document.querySelector('.prj-wrapper');
   var projectItems = prjWrapper.querySelectorAll('.project');
@@ -29,6 +28,11 @@ document.addEventListener('DOMContentLoaded', function() {
   btnBack.addEventListener('click', function() {
     slideIndex--;
     showProjects();
+  });
+
+  // Agregar evento al cambio de tamaño de ventana
+  window.addEventListener('resize', function() {
+    checkWindowSize();
   });
 
   function showProjects() {
@@ -57,4 +61,34 @@ document.addEventListener('DOMContentLoaded', function() {
       btnNext.style.display = 'block';
     }
   }
+
+  function checkWindowSize() {
+    var windowWidth = window.innerWidth;
+
+    if (windowWidth <= 1400) {
+      projectsPerPage = 2;
+    } else {
+      projectsPerPage = 3;
+    }
+
+    // Actualizar la visualización de los proyectos según la nueva cantidad por página
+    showProjects();
+  }
 });
+
+
+// Timeline
+
+const line= document.querySelector('.timeline-innerline');
+const timeline_events= document.querySelectorAll('.ul-timeline .li-timeline');
+
+let observer=new IntersectionObserver((entries, observer)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      line.style.width=`100%`;
+    }
+  });
+}, {});
+
+let target=document.querySelector('.ul-timeline');
+observer.observe(target);

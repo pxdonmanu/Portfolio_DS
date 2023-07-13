@@ -33,7 +33,6 @@
             <ul class="about-menu en-menu">
               <li><a href="#skills">Skills</a></li>
               <li><a href="#exp">Experience</a></li>
-              <li><a href="#education">Education</a></li>
               <li><a href="#vision">Vision</a></li>
             </ul>
           </li>
@@ -64,8 +63,21 @@
             <div class="sks-title">
               <h1>Professional skills</h1>
             </div>
-            <div class="sks-content">
-      
+            <div class="sks-content pro-sks-cont">
+
+              {% for proSkill in proskills %}
+                <div class="pro-abi">
+                  <div class="pro-abi-img">
+                    <div class="pro-img">
+                      <img src="{{ proSkill.image.url }}"/>
+                    </div>
+                  </div>
+                  <div class="pro-abi-text">
+                    <div class="pro-abi-name"><h1>{{ proSkill.name }}</h1></div>
+                  </div>
+                </div>
+              {% endfor %}
+
             </div>
           </div>
           <div class="ctn-sks-right">
@@ -107,8 +119,60 @@
         </div>
       </div>
 
-      {% include 'english/me/experience.html' %}
-      {% include 'english/me/education.html' %}
+      {% comment %} EXPERIENCE {% endcomment %}
+
+      <div class="item exp-div" id="exp">
+        <div class="content-exp">
+          <div class="exp-title">
+            <h1>Education and Experience</h1>
+          </div>
+          <div class="ctn-exp">
+            <section class="timeline-exp">
+              <div class="timeline-line">
+                <span class="timeline-innerline"></span>
+              </div>
+              <ul class="ul-timeline">
+                <li class="li timeline">
+                  <div class="timeline-content">
+                    <span class="timeline-point"></span>
+                    <span class="date">2000</span>
+                    <p class="p-timeline">This is an example</p>
+                  </div>
+                </li>
+                <li class="li timeline">
+                  <div class="timeline-content">
+                    <span class="timeline-point"></span>
+                    <span class="date">2000</span>
+                    <p class="p-timeline">Lorem ipsum dolor sit amet</p>
+                  </div>
+                </li>
+                <li class="li timeline">
+                  <div class="timeline-content">
+                    <span class="timeline-point"></span>
+                    <span class="date">2000</span>
+                    <p class="p-timeline">Lorem ipsum dolor sit amet</p>
+                  </div>
+                </li>
+                <li class="li timeline">
+                  <div class="timeline-content">
+                    <span class="timeline-point"></span>
+                    <span class="date">2000</span>
+                    <p class="p-timeline">Lorem ipsum dolor sit amet</p>
+                  </div>
+                </li>
+                <li class="li timeline">
+                  <div class="timeline-content">
+                    <span class="timeline-point"></span>
+                    <span class="date">2000</span>
+                    <p class="p-timeline">Lorem ipsum dolor sit amet</p>
+                  </div>
+                </li>
+              </ul>
+            </section>
+          </div>
+        </div>
+      </div>
+
       {% include 'english/me/vision.html' %}
       
       {% comment %} PROJECTS {% endcomment %}
